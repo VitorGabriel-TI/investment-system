@@ -1,5 +1,7 @@
 package com.vitorgabrielti.sistemainvestimentos.controller;
 
+import com.vitorgabrielti.sistemainvestimentos.dto.AccountResponseDTO;
+import com.vitorgabrielti.sistemainvestimentos.dto.CreateAccountDTO;
 import com.vitorgabrielti.sistemainvestimentos.dto.CreateUserDTO;
 import com.vitorgabrielti.sistemainvestimentos.dto.UpdateUserDTO;
 import com.vitorgabrielti.sistemainvestimentos.entity.User;
@@ -54,5 +56,21 @@ public class UserController {
         userService.deleteById(userId);
         return ResponseEntity.noContent().build();
     }
-    
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> createAccount(@PathVariable("userId") String userId,
+                                              @RequestBody CreateAccountDTO createAccountDTO) {
+
+        userService.createAccount(userId, createAccountDTO);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/accounts")
+    public ResponseEntity<List<AccountResponseDTO>> listAccount(@PathVariable("userId") String userId) {
+
+        var accounts = userService.listAccounts(userId);
+
+        return ResponseEntity.ok(accounts);
+    }
 }
