@@ -8,7 +8,7 @@ public class AccountStock {
     @EmbeddedId
     private AccountStockId accountStockId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     @MapsId("accountId")
     private Account account;

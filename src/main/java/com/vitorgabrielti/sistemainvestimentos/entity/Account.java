@@ -17,7 +17,7 @@ public class Account {
     @Column(name = "account_id")
     private UUID accountId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
@@ -29,7 +29,7 @@ public class Account {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AccountStock> accountStocks = new ArrayList<>();
 
     public Account() {

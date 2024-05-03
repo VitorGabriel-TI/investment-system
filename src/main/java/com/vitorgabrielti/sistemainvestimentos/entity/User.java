@@ -32,7 +32,7 @@ public class User {
     @UpdateTimestamp
     private Instant updateTimestamp;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Account> accounts = new ArrayList<>();
 
